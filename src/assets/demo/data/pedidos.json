@@ -1,0 +1,16 @@
+{
+  "data": [
+    {
+      "id": "1",
+      "descricao": "Strogonoff de frango Médio",
+      "valor": 28.00,
+      "quantidade": 1
+    },
+    {
+      "id": "2",
+      "descricao": "Coca-cola 2l",
+      "valor": 12.00,
+      "quantidade": 1
+    }
+  ]
+}
