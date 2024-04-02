@@ -1,0 +1,56 @@
+<div class=" card grid row" style="background-color: rgba(245,245,245,0.15)">
+    <div class="m-4 col-4">
+        <div class="card shadow-1">
+            <div class="card col-4" style="background-color: darkgrey; text-align: center;">
+                <p style="font-weight: bold; font-size:21px">Mesa 1</p>
+            </div>
+            <!--            isso abaixo deve virar uma tabela para ser possível ter comandas dinâmicas-->
+            <h3 style="font-weight: bold;">Comanda: #45</h3>
+            <h3 style="font-weight: bold;">Cliente: Rafael Almeida</h3>
+        </div>
+    </div>
+    <div class="ml-6 col-4 p-card" style="background-color:rgba(234,234,234,0.15)">
+        <h1 style="text-align: center;">Resumo do Pedido</h1>
+        <div class="card border-round" style="background-color:darkgrey">
+            <p-dataView [value]="pedidos" layout="grid">
+                <ng-template pTemplate="gridItem">
+                    <div class="grid grid-nogutter" style="background-color: darkgrey">
+                        <div class="col-12" style="text-align: center" *ngFor="let item of pedidos">
+                            <div class="card  shadow-5 m-3">
+                                <div class=" text-center">
+                                    <p style="font-size: 17px">{{item.quantidade}}x  {{item.descricao}}
+                                        |  {{item.valor | currency}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <button class="w-full p-3 text-xl green"
+                                style="background-color: lightgreen ;border-color: white;border:0px; border-radius: 16px;font-weight: bold;">
+                            Finalizar
+                        </button>
+                    </div>
+
+                </ng-template>
+            </p-dataView>
+        </div>
+    </div>
+    <div class="row card m-4 col-4 shadow-1">
+        <h1 style="font-weight: bold;text-align: center"> Formas de Pagamento</h1>
+        <button class=" p-3 text-xl col-6"
+                style=";border-color: black; border-radius: 16px;background-color: white">
+            <img src="assets/demo/images/icons/pix.png" alt="Image" width="150px" height="130px" class="col-12">
+        </button>
+        <button class=" p-3 text-xl col-6"
+                style=";border-color: black; border-radius: 16px;font-weight: bold; background-color:rgba(223,223,223,0.15)">
+            <img src="assets/demo/images/icons/credito.png" alt="image" width="150px" height="130px" class="col-12">
+        </button>
+        <button class=" text-xl col-6"
+                style=";border-color: black; border-radius: 16px;font-weight: bold;">
+            <img src="assets/demo/images/icons/dinheiro.png" alt="image" width="150px" height="130px" class="col-12">
+        </button>
+        <button class=" p-3 text-xl col-6"
+                style=";border-color: black; border-radius: 16px;font-weight: bold;">
+            <img src="assets/demo/images/icons/debito.png" alt="image" width="150px" height="130px" class="col-12">
+        </button>
+    </div>
+</div>
+
