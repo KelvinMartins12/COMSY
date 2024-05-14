@@ -1,25 +1,18 @@
 <div class=" card grid row" style="background-color: rgba(245,245,245,0.15)">
     <div class="m-4 col-4">
-        <div class="card shadow-1">
-            <div class="card col-4" style="background-color: darkgrey; text-align: center;">
-                <p style="font-weight: bold; font-size:21px">Mesa 1</p>
-            </div>
-            <!--            isso abaixo deve virar uma tabela para ser possível ter comandas dinâmicas-->
-            <h3 style="font-weight: bold;">Comanda: #45</h3>
-            <h3 style="font-weight: bold;">Cliente: Rafael Almeida</h3>
-        </div>
+        <p-dropdown [options]="mesas"  [(ngModel)]="selectedMesa" optionLabel="name"placeholder="Select a table"></p-dropdown>
     </div>
     <div class="ml-6 col-4 p-card" style="background-color:rgba(234,234,234,0.15)">
         <h1 style="text-align: center;">Resumo do Pedido</h1>
         <div class="card border-round" style="background-color:darkgrey">
-            <p-dataView [value]="pedidos" layout="grid">
+            <p-dataView [value]="pedido.pratos" layout="grid">
                 <ng-template pTemplate="gridItem">
                     <div class="grid grid-nogutter" style="background-color: darkgrey">
-                        <div class="col-12" style="text-align: center" *ngFor="let item of pedidos">
+                        <div class="col-12" style="text-align: center" *ngFor="let prato of pedido.pratos">
                             <div class="card  shadow-5 m-3">
                                 <div class=" text-center">
-                                    <p style="font-size: 17px">{{item.quantidade}}x  {{item.descricao}}
-                                        |  {{item.valor | currency}}</p>
+                                    <p style="font-size: 17px">{{prato.quantidade}}x  {{prato.descricao}}
+                                        |  {{prato.valor | currency}}</p>
                                 </div>
                             </div>
                         </div>

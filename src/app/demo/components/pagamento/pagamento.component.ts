@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
-import {PedidoService} from "../../services/pagamento.service";
+import {Component, Input} from '@angular/core';
+import {PedidoService} from "../../services/pedido.service";
 import {Pedido} from "../../api/pedido";
+import {MesaService} from "../../services/mesa.service";
+import {Observable} from "rxjs";
 
 
 @Component({
@@ -9,16 +11,27 @@ import {Pedido} from "../../api/pedido";
   styleUrl: './pagamento.component.scss'
 })
 export class PagamentoComponent {
-  pedidos: Pedido[] = [];
+  mesas: any[];
+  selectedMesa: any
+  pedido: Pedido;
 
-  constructor(private pedidoService: PedidoService) {
-
+  constructor(private mesaService: MesaService,private pedidoService: PedidoService) {
+    this.mesaService.getAll().valueChanges().subscribe(mesas => {
+      this.mesas = mesas;
+    });
   }
 
-  ngOnInit() {
-    this.pedidoService.getPedidos().then(result => {
-      this.pedidos = result.pedidos;
+  buscarPagamentoPendente(mesaEscolhida: any) {
+    this.pedidoService.getPedidoByMesa(mesaEscolhida.key).subscribe(pedidos => {
+      if (pedidos.length > 0) {
+        this.pedido = pedidos[0];
+      } else {
+        this.pedido = null;
+      }
     });
+  }
+  ngOnInit() {
+
   }
 
 }

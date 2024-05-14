@@ -1,0 +1,102 @@
+<div class="row " style="display: inline-flex">
+    <div class="col-8">
+        <div class="card shadow-4">
+            <h5>Mesas</h5>
+
+            <div class="row pl-6">
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0', 'font-size': '16px','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Todos'"
+                       value="Todos">
+                </p-tag>
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Prato Feito'"
+                       value="Prato Feito">
+                </p-tag>
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Salgados'"
+                       value="Salgados">
+                </p-tag>
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Sobremesas'"
+                       value="Sobremesas">
+                </p-tag>
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Porções'"
+                       value="Porções">
+                </p-tag>
+                <p-tag [rounded]="true"
+                       class="col-2"
+                       [style]="{'background-color': clicked ? '#80bfff' : '#f0f0f0','color':'black'}"
+                       (click)="clicked = !clicked; selectedCategory = 'Bebidas'"
+                       value="Bebidas">
+                </p-tag>
+            </div>
+            <div class="row" style="display:flex;flex-wrap: wrap">
+                <div class="col-4" *ngFor="let prato of pratos">
+                    <div *ngIf="selectedCategory === 'Todos' || prato.categoria === selectedCategory">
+                        <div class="card surface-card shadow-4 border-round"
+                             style="border-color:black;
+                background-image: url('./assets/demo/images/pratos/{{prato.foto}}');
+                background-size: 100% 50%;
+                background-position: top;
+                background-repeat: no-repeat;
+                height: 300px;
+            ">
+                        </div>
+                        <div class="" style="background-color: #fff; padding: 16px;">
+                  <span style="font-size: 16px;">
+                    {{prato.descricao}}
+                  </span>
+                            <p-button type="button" label="Adicionar" icon="pi pi-plus" styleClass="p-button-success"
+                                      (click)="addPrato(prato)"></p-button>
+                            <p-button type="button" label="R$ {{prato.valor}}" styleClass="p-button-secondary"
+                                      style=""></p-button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="card-header">
+            <h5>Pedido</h5>
+        </div>
+        <div class="card surface-card shadow-4 border-round col-4"
+             style="height: 600px;width: 400px;font-size: 15px;overflow-y: auto;">
+            <div style="height: 500px;text-align: center;">
+                <div class="card shadow-4" style="padding: 10px;" *ngFor="let prato of pedido.pratos">
+                    <span>1x </span>
+                    <span>{{ prato.descricao }}</span>
+                    <p-button class="mx-2"
+                              [style]="{ 'font-size': '0.75em', 'padding': '0.25em 0.5em','color':'green' }"
+                              [rounded]="true" [outlined]="true"><i class="fas fa-plus"
+                                                                    (click)="addPrato(prato)"></i>
+                    </p-button>
+                    <p-button class="mr-2"
+                              [style]="{ 'font-size': '0.75em', 'padding': '0.25em 0.5em','color':'red' }"
+                              [rounded]="true" [outlined]="true"><i class="fa-solid fa-minus"
+                                                                    (click)="removePrato(prato)"></i>
+                    </p-button>
+                    <span>|</span> <span>R$ {{ prato.valor }}</span>
+                </div>
+            </div>
+            <div class="row" >
+                <p-button class="col-4" icon="fas fa-plus" [rounded]="true" [raised]="true" severity="secondary" />
+                <p-button class="col-8" label="Enviar Pedido" (click)="showDialog()" (onClick)="save(pedido)" [rounded]="true" severity="success" />
+            </div>
+        </div>
+    </div>
+    <p-dialog header="Pedido Enviado!" [modal]="true" [(visible)]="visible" [style]="{ width: '25rem','text-align':'center' }">
+            <p-button label="Fechar" severity="secondary" (click)="visible = false" />
+    </p-dialog>
+</div>

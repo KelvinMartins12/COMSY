@@ -12,6 +12,7 @@ import {OrderListModule} from "primeng/orderlist";
 import {PickListModule} from "primeng/picklist";
 import {RatingModule} from "primeng/rating";
 import {DividerModule} from "primeng/divider";
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
     imports: [
@@ -27,7 +28,8 @@ import {DividerModule} from "primeng/divider";
         OrderListModule,
         PickListModule,
         RatingModule,
-        DividerModule
+        DividerModule,
+        FormsModule
     ],
     declarations: [PagamentoComponent]
 })

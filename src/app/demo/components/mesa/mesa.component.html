@@ -7,7 +7,7 @@
                     <div class="grid grid-nogutter">
                         <div class="col-12 md:col-3" style="text-align: center" *ngFor="let mesa of mesas">
                             <h3>{{mesa.name}}</h3>
-                            <div class="card m-3 border-1 surface-border " (click)="selecionaMesa(mesa.id)"
+                            <div class="card m-3 border-1 surface-border " (click)="selecionaMesa(mesa.name)"
                                  [ngStyle]="{ 'background-color': getColor(mesa.estado) }">
                                 <div class="flex flex-column align-items-center text-center mb-3">
                                     <i *ngIf="mesa.estado === 'Limpeza'" class="pi pi-trash"

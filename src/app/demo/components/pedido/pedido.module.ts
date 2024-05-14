@@ -8,6 +8,7 @@ import {SharedModule} from "primeng/api";
 import { TagModule } from "primeng/tag";
 import {CardModule} from "primeng/card";
 import {ButtonModule} from "primeng/button";
+import {DialogModule} from "primeng/dialog";
 
 
 
@@ -22,7 +23,8 @@ import {ButtonModule} from "primeng/button";
         NgIf,
         SharedModule,
         CardModule,
-        ButtonModule
+        ButtonModule,
+        DialogModule
 
     ],
      declarations: [PedidoComponent]
