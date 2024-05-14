@@ -1,7 +1,9 @@
 export interface Mesa {
-    id?: string;
-    estado?: string;
-    name?: string;
+    id: string;
+    estado: string;
+    name: string;
+    comanda:number,
+    cliente: string
 }
 export enum MesaEstado {
     EncaminhadoPraCozinha = 0,

@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import {PedidoService} from "../../service/pagamento.service";
+import {PedidoService} from "../../services/pagamento.service";
 import {Pedido} from "../../api/pedido";
 
 

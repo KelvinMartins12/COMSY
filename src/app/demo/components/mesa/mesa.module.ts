@@ -12,10 +12,11 @@ import {OrderListModule} from "primeng/orderlist";
 import {PickListModule} from "primeng/picklist";
 import {RatingModule} from "primeng/rating";
 import {DividerModule} from "primeng/divider";
+import {TagModule} from "primeng/tag";
+
 
 @NgModule({
     imports: [
-
         CommonModule,
         MesaRoutingModule,
         CardModule,
@@ -27,7 +28,8 @@ import {DividerModule} from "primeng/divider";
         OrderListModule,
         PickListModule,
         RatingModule,
-        DividerModule
+        DividerModule,
+        TagModule
     ],
     declarations: [MesaComponent]
 })

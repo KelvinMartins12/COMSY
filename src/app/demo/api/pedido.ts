@@ -1,6 +1,8 @@
+import {Pratos} from "./pratos";
+
 export interface Pedido {
-    id?:string,
-    descricao?: string,
-    valor?: number
-    quantidade?: number
+    id: string;
+    pratos: Pratos[];
+    total: number;
+    nomeMesa: string;
 }
