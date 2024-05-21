@@ -20,7 +20,7 @@ import {AuthGuard} from "./demo/components/auth/services/auth.guard";
                         loadChildren: () => import('./demo/components/mesa/mesa.module').then(m => m.MesaModule),
                     },
                     {
-                        path: 'mesas/pedidos',
+                        path: 'mesas/pedidos/:id',
                         loadChildren: () => import('./demo/components/pedido/pedido.module').then(m => m.PedidoModule),
                     },
                     {

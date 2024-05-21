@@ -10,7 +10,7 @@ const routes: Routes = [
         component: MesaComponent,
         children: [
             {
-                path: 'pedidos',
+                path: 'pedidos/:id',
                 loadChildren: () => import('../pedido/pedido-routing.module').then(m => m.PedidoRoutingModule)
             }
         ]

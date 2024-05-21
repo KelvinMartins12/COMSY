@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import {AngularFireDatabase, AngularFireList} from "@angular/fire/compat/database";
 import { Mesa} from "../api/mesa";
+import {Observable} from "rxjs";
 @Injectable()
 export class MesaService {
     private dbPath = '/mesas';
@@ -30,24 +31,21 @@ export class MesaService {
         return this.mesasRef.remove();
     }
 
-    getMesas(): Promise<{ mesas: Mesa[]; estadoCounts: { [key: string]: number } }> {
-        return new Promise((resolve, reject) => {
-            this.mesasRef.snapshotChanges().subscribe(snapshots => {
-                const mesas: Mesa[] = [];
+    getMesas(): Observable<{ mesas: Mesa[]; estadoCounts: { [key: string]: number } }> {
+        return new Observable<{ mesas: Mesa[]; estadoCounts: { [key: string]: number } }>(observer => {
+            this.getAll().valueChanges().subscribe(mesas => {
                 const estadoCounts: { [key: string]: number } = {};
-                snapshots.forEach(snapshot => {
-                    const mesa = snapshot.payload.val();
-                    mesa.id = snapshot.key;
-                    mesas.push(mesa);
+                const formattedMesas: Mesa[] = mesas.map(mesa => {
                     if (estadoCounts[mesa.estado]) {
                         estadoCounts[mesa.estado]++;
                     } else {
                         estadoCounts[mesa.estado] = 1;
                     }
+                    return mesa;
                 });
-                resolve({ mesas, estadoCounts });
+                observer.next({ mesas: formattedMesas, estadoCounts });
             }, error => {
-                reject(error);
+                observer.error(error);
             });
         });
     }

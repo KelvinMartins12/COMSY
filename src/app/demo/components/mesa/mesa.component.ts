@@ -4,6 +4,7 @@ import {Mesa} from "../../api/mesa";
 import {Router} from "@angular/router";
 import {Pratos} from "../../api/pratos";
 import {PratosService} from "../../services/prato.service";
+import {Subscription} from "rxjs";
 
 @Component({
     selector: 'app-mesa',
@@ -12,6 +13,7 @@ import {PratosService} from "../../services/prato.service";
 })
 export class MesaComponent {
     mesas: Mesa[] = [];
+    mesasSubscription: Subscription;
     // pratos: Pratos[] = [
     //     { id: '1', descricao: 'Strogonoff de frango - Pequeno', valor: 18,categoria:'Prato feito', foto:'strogonoffp.jpg',quantidade:0},
     //     { id: '2', descricao: 'Strogonoff de frango - Médio', valor: 28,categoria:'Prato feito',foto:'strogonoffm.jpg',quantidade:0},
@@ -25,7 +27,7 @@ export class MesaComponent {
     // ];
     estadoCounts: any = {};
     mesaEscolhida: number;
-
+    totalMesas: number;
     colors: { state: string, color: string }[] = [
         {state: 'Encaminhado pra cozinha', color: 'yellow'},
         {state: 'Pronto para Servir', color: 'red'},
@@ -38,9 +40,17 @@ export class MesaComponent {
     }
 
     ngOnInit() {
-        this.mesaService.getMesas().then(result => {
+        this.mesasSubscription = this.mesaService.getMesas().subscribe(result => {
             this.mesas = result.mesas;
             this.estadoCounts = result.estadoCounts;
+            this.totalMesas = 0;
+            for (const estado in this.estadoCounts) {
+                if (this.estadoCounts.hasOwnProperty(estado)) {
+                    this.totalMesas += this.estadoCounts[estado];
+                }
+            }
+        }, error => {
+            // Trate o erro aqui, se necessário
         });
 
     }
@@ -50,8 +60,8 @@ export class MesaComponent {
         return colorObj ? colorObj.color : 'white';
     }
 
-    selecionaMesa(mesaEscolhida) {
-        this.router.navigate(['mesas/pedidos'], {state: {mesaEscolhida}})
+    selecionaMesa(mesaEscolhida):void  {
+        this.router.navigate(['mesas/pedidos', mesaEscolhida]);
     }
 
     calculaSomaEstados(): void {
@@ -68,5 +78,10 @@ export class MesaComponent {
         //     this.estadoCounts.Total++;
         // });
     }
+    ngOnDestroy() {
+        // Desinscreva a assinatura para evitar vazamentos de memória
+        this.mesasSubscription.unsubscribe();
+    }
+
 
 }

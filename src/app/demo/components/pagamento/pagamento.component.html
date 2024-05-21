@@ -1,6 +1,8 @@
 <div class=" card grid row" style="background-color: rgba(245,245,245,0.15)">
     <div class="m-4 col-4">
-        <p-dropdown [options]="mesas"  [(ngModel)]="selectedMesa" optionLabel="name"placeholder="Select a table"></p-dropdown>
+        <p-dropdown [options]="mesas" [(ngModel)]="selectedMesa" optionLabel="name"
+                    (ngModelChange)="onMesaSelect($event, selectedMesa.id)"
+                    placeholder="Selecione uma mesa"></p-dropdown>
     </div>
     <div class="ml-6 col-4 p-card" style="background-color:rgba(234,234,234,0.15)">
         <h1 style="text-align: center;">Resumo do Pedido</h1>
@@ -16,8 +18,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button class="w-full p-3 text-xl green"
-                                style="background-color: lightgreen ;border-color: white;border:0px; border-radius: 16px;font-weight: bold;">
+                        <button class="w-full p-3 text-xl green" (click)="FinalizaPedido(pedido.idMesa)"
+                                style="background-color: lightgreen ;border: 1px solid lightgray; border-radius: 16px;cursor: pointer;font-weight: bold;">
                             Finalizar
                         </button>
                     </div>

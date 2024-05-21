@@ -7,8 +7,8 @@
                     <div class="grid grid-nogutter">
                         <div class="col-12 md:col-3" style="text-align: center" *ngFor="let mesa of mesas">
                             <h3>{{mesa.name}}</h3>
-                            <div class="card m-3 border-1 surface-border " (click)="selecionaMesa(mesa.name)"
-                                 [ngStyle]="{ 'background-color': getColor(mesa.estado) }">
+                            <div class="card m-3 border-1 surface-border" (click)="selecionaMesa(mesa.id)"
+                                 [ngStyle]="{ 'background-color': getColor(mesa.estado), 'width': '200px', 'height': '130px' }">
                                 <div class="flex flex-column align-items-center text-center mb-3">
                                     <i *ngIf="mesa.estado === 'Limpeza'" class="pi pi-trash"
                                        style="font-size: 2rem;"></i>
@@ -26,30 +26,21 @@
     <div class="m-4 col-3">
         <div class="card surface-card shadow-4 border-round" style="border-color:black">
             <div class="p-3 text-center">
-                <div class=" row" style="text-align: left">
-                    Disponível
-                    <h1>{{ estadoCounts['Disponível'] }}</h1>
-                </div>
-                <div class=" row" style="text-align: left">
-                    Encaminhando pra cozinha
-                    <h1>{{ estadoCounts['Encaminhado pra cozinha'] }}</h1>
-                </div>
-                <div class=" row" style="text-align: left">
-                    Pronto pra Servir
-                    <h1>{{ estadoCounts['Pronto para Servir'] }}</h1>
-                </div>
-                <div class=" row" style="text-align: left">
-                    Aguardando Pagamento
-                    <h1>{{ 4 }}</h1>
-                </div>
-                <div class=" row" style="text-align: left">
-                    Limpeza
-                    <h1>{{ estadoCounts['Limpeza'] }}</h1>
+                <div class="row" *ngFor="let estado of estadoCounts | keyvalue">
+                    <div class="col-4" style="text-align: left">
+
+                        {{ estado.key }}
+
+                    </div>
+                    <div class="col-4" style="text-align: left;display: inline-flex">
+                        <h1>{{ estado.value }}</h1>
+                        <p-button icon="" [rounded]="true" [style]="{ 'background-color': getColor(estado.key),'width':'30px','height':'1px'}" [disabled]="true"  />
+                    </div>
                 </div>
                 <p-divider style="border-color: black"></p-divider>
                 <div class="row" style="text-align: center">
                     Total
-                    <h1>{{ 16 }}</h1>
+                    <h1>{{ totalMesas}}</h1>
                 </div>
             </div>
         </div>

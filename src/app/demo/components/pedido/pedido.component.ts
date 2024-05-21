@@ -4,6 +4,7 @@ import {PratosService} from "../../services/prato.service";
 import {Pedido} from "../../api/pedido";
 import {ActivatedRoute} from "@angular/router";
 import {PedidoService} from "../../services/pedido.service";
+import {COLLECTION_ENABLED} from "@angular/fire/compat/analytics";
 
 
 @Component({
@@ -23,22 +24,19 @@ export class PedidoComponent implements OnInit{
         id: '',
         pratos: [],
         total: 0,
-        nomeMesa: ''
+        idMesa: null
     };
 
     pratos: unknown[] = [];
 
     constructor(private pratoService: PratosService, private route: ActivatedRoute,private pedidoService:PedidoService) {
     }
-
-    ngOnInit() {
+    ngOnInit() : void    {
         this.pratoService.getAll().subscribe(pratos =>{
             this.pratos = pratos;
         })
-        this.mesaEscolhida = this.route.snapshot.paramMap.get('mesaEscolhida');
-        if (!this.mesaEscolhida) {
-            this.mesaEscolhida = this.route.snapshot.queryParamMap.get('mesaEscolhida');
-        }
+        this.mesaEscolhida = this.route.snapshot.paramMap.get('id');
+
     }
 
     addPrato(prato: Pratos): void {
@@ -46,9 +44,9 @@ export class PedidoComponent implements OnInit{
         this.pedido.pratos.push(prato);
         this.pedido.total += prato.valor;
 
-        this.pedido.nomeMesa = this.mesaEscolhida;
+        this.pedido.idMesa = +this.route.snapshot.paramMap.get('id');
 
-        console.log(this.pedido.nomeMesa)
+        console.log(this.mesaEscolhida)
     }
     removePrato(prato: Pratos): void {
         prato.quantidade = (prato.quantidade || 0) - 1;
@@ -60,7 +58,6 @@ export class PedidoComponent implements OnInit{
     }
 
     save(pedido: Pedido): void {
-
         this.pedidoService.create(pedido)
         this.pedido.pratos = []
     }

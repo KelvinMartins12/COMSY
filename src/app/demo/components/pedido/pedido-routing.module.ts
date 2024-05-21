@@ -6,7 +6,7 @@ import {PedidoComponent} from "./pedido.component";
 @NgModule({
     imports: [RouterModule.forChild([
         {
-            path: 'pedidos', component: PedidoComponent
+            path: 'pedidos/:id', component: PedidoComponent
         }
     ])],
     exports: [RouterModule]
