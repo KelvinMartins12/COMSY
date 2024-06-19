@@ -21,7 +21,7 @@ enum BlockView {
                 <a [attr.tabindex]="'0'" [ngClass]="{'block-action-active': blockView === BlockView.CODE}" (click)="activateView($event, BlockView.CODE)">
                     <span>Code</span>
                 </a>
-                <a [attr.tabindex]="'0'" class="block-action-copy" (click)="copyCode($event)" 
+                <a [attr.tabindex]="'0'" class="block-action-copy" (click)="copyCode($event)"
                     pTooltip="Copied to clipboard" tooltipEvent="focus" tooltipPosition="bottom"><i class="pi pi-copy m-0"></i></a>
             </div>
         </div>

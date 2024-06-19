@@ -13,7 +13,7 @@ export class AuthService {
         });
     }
 
-    login(email: string, password: string) {
+    login(email: string, password: string ) {
         this.auth.signInWithEmailAndPassword(email, password).then(
             () => {
                 if (this.estaLogado())

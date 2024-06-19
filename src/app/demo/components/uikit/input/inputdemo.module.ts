@@ -11,7 +11,7 @@ import { DropdownModule } from "primeng/dropdown";
 import { InputMaskModule } from "primeng/inputmask";
 import { InputNumberModule } from "primeng/inputnumber";
 import { CascadeSelectModule } from "primeng/cascadeselect";
-import { MultiSelectModule } from "primeng/multiselect";
+import { MultiSelectModule } from "primeng/multiselect"; 
 import { InputTextareaModule } from "primeng/inputtextarea";
 import { InputTextModule } from "primeng/inputtext";
 import { RatingModule } from 'primeng/rating';

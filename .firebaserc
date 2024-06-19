@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "autenticacao-36477": {
+      "hosting": {
+        "sakai-ng": [
+          "autenticacao-36477"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "autenticacao-36477"
+  }
+}
